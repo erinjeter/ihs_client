@@ -14,6 +14,7 @@ type valueTypes = {
 
 type acceptedProps = {
   home: any;
+  index: any;
 };
 
 class HomeCard extends Component<acceptedProps, valueTypes> {
