@@ -59,7 +59,12 @@ class Login extends Component<acceptedProps, valueTypes> {
             value={this.state.password}
             onChange={(e) => this.setState({ password: e.target.value })}
           />
-          <button type="submit">Login</button>
+          <button
+            type="submit"
+            className="font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          >
+            Login
+          </button>
         </form>
       </div>
     );

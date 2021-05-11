@@ -162,7 +162,12 @@ class Signup extends Component<acceptedProps, valueTypes> {
               required
               onClick={(e) => this.setState({ isResident: true })}
             />
-            <button type="submit">Signup</button>
+            <button
+              type="submit"
+              className="font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            >
+              Signup
+            </button>
           </div>
         </form>
       </div>

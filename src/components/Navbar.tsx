@@ -1,27 +1,56 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-class Navbar extends Component {
+type acceptedProps = {
+  token: any;
+  logout: any;
+};
+
+class Navbar extends Component<acceptedProps, {}> {
   constructor(props: any) {
     super(props);
   }
+
+  logoutButton = () => {
+    return localStorage.getItem("sessionToken") === null ? (
+      ""
+    ) : (
+      <button onClick={this.props.logout}>Logout</button>
+    );
+  };
 
   render() {
     return (
       <div className="App flex justify-between h-18 relative uppercase bg-black">
         <div className="p-4 md:block">
-          <Link className="p-4 text-gray-500 hover:text-gray-200" to="/">
+          <NavLink className="p-4 text-gray-500 hover:text-gray-200" to="/">
             ABOUT
-          </Link>
-          <Link className="p-4 text-gray-500 hover:text-gray-200" to="/">
-            RESOURCES
-          </Link>
-          <Link className="p-4 text-gray-500 hover:text-gray-200" to="/">
-            GET INVOLVED
-          </Link>
-          <Link className="p-4 text-gray-500 hover:text-gray-200" to="/">
-            SEARCH HISTORIC HOMES
-          </Link>
+          </NavLink>
+          <NavLink
+            className="p-4 text-gray-500 hover:text-gray-200"
+            to="/stories"
+          >
+            IRVINGTON STORIES
+          </NavLink>
+          <NavLink
+            className="p-4 text-gray-500 hover:text-gray-200"
+            to="/homes"
+          >
+            HISTORIC HOMES
+          </NavLink>
+          <NavLink
+            className="p-4 text-gray-500 hover:text-gray-200"
+            to="/homes/create"
+          >
+            ADD HOMES
+          </NavLink>
+          <NavLink
+            onClick={this.props.logout}
+            className="p-4 text-gray-500 hover:text-gray-200"
+            to="/"
+          >
+            Logout
+          </NavLink>
         </div>
       </div>
     );

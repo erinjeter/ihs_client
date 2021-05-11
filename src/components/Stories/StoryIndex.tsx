@@ -1,22 +1,23 @@
 import React, { Component } from "react";
-import HomeDisplay from "./HomeDisplay";
+import StoryDisplay from "./StoryDisplay";
 
 type valueTypes = {
-  allHomes: any;
+  allStories: any;
 };
 
 type acceptedProps = {
   sessionToken: any;
 };
 
-class HomeIndex extends Component<acceptedProps, valueTypes> {
+class StoryIndex extends Component<acceptedProps, valueTypes> {
   constructor(props: any) {
     super(props);
-    this.state = { allHomes: [] };
+    this.state = { allStories: [] };
   }
 
-  getHomes = () => {
-    fetch("http://localhost:3000/homes", {
+  getStories = () => {
+    console.log(this.props);
+    fetch("http://localhost:3000/stories", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,12 +27,12 @@ class HomeIndex extends Component<acceptedProps, valueTypes> {
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
-        this.setState({ allHomes: json });
+        this.setState({ allStories: json });
       });
   };
 
   componentDidMount() {
-    this.getHomes();
+    this.getStories();
     console.log(this.props.sessionToken);
   }
 
@@ -39,10 +40,10 @@ class HomeIndex extends Component<acceptedProps, valueTypes> {
     return (
       <div>
         <div>
-          <HomeDisplay
-            allHomes={this.state.allHomes}
+          <StoryDisplay
+            allStories={this.state.allStories}
             sessionToken={this.props.sessionToken}
-            getHomes={this.getHomes}
+            getStories={this.getStories}
           />
         </div>
       </div>
@@ -50,4 +51,4 @@ class HomeIndex extends Component<acceptedProps, valueTypes> {
   }
 }
 
-export default HomeIndex;
+export default StoryIndex;
