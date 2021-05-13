@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import HomeDisplay from "./HomeDisplay";
+import APIURL from "../../helpers/environment";
 
 type valueTypes = {
   allHomes: any;
@@ -16,7 +17,7 @@ class HomeIndex extends Component<acceptedProps, valueTypes> {
   }
 
   getHomes = () => {
-    fetch("http://localhost:3000/homes", {
+    fetch(`${APIURL}/homes`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

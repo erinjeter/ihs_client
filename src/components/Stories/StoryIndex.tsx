@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import AddStories from "./AddStories";
 import StoryDisplay from "./StoryDisplay";
+import APIURL from "../../helpers/environment";
 
 type valueTypes = {
   allStories: any;
@@ -16,8 +18,8 @@ class StoryIndex extends Component<acceptedProps, valueTypes> {
   }
 
   getStories = () => {
-    console.log(this.props);
-    fetch("http://localhost:3000/stories", {
+    console.log(this.props.sessionToken);
+    fetch(`${APIURL}/stories`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -42,6 +44,10 @@ class StoryIndex extends Component<acceptedProps, valueTypes> {
         <div>
           <StoryDisplay
             allStories={this.state.allStories}
+            sessionToken={this.props.sessionToken}
+            getStories={this.getStories}
+          />
+          <AddStories
             sessionToken={this.props.sessionToken}
             getStories={this.getStories}
           />

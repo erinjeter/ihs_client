@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import APIURL from "../../helpers/environment";
 
 type acceptedProps = {
   sessionToken: any;
+  permission: (newPermission: string) => void;
 };
 
 type valueTypes = {
@@ -20,7 +22,7 @@ class Login extends Component<acceptedProps, valueTypes> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    fetch("http://localhost:3000/user/login", {
+    fetch(`${APIURL}/user/login`, {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -33,6 +35,7 @@ class Login extends Component<acceptedProps, valueTypes> {
       .then((res) => res.json())
       .then((data) => {
         this.props.sessionToken(data.sessionToken);
+        this.props.permission(data.user.permission);
         console.log(data);
       });
   };

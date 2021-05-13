@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import APIURL from "../../helpers/environment";
 
 type acceptedProps = {
   sessionToken: any;
@@ -35,7 +36,7 @@ class AddHomes extends Component<acceptedProps, valueTypes> {
   }
 
   addHome = (e: any) => {
-    fetch(`http://localhost:3000/homes/create`, {
+    fetch(`${APIURL}/homes/create`, {
       method: "POST",
       body: JSON.stringify({
         homestreet1: this.state.homestreet1,

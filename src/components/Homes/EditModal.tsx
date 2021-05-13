@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import APIURL from "../../helpers/environment";
 
 type valueTypes = {
   showModal: boolean;
@@ -35,7 +36,7 @@ class EditModal extends Component<acceptedProps, valueTypes> {
   updateHome = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/homes/update/${this.props.home.id}`,
+        `${APIURL}/homes/update/${this.props.home.id}`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -64,7 +65,7 @@ class EditModal extends Component<acceptedProps, valueTypes> {
   };
 
   deleteHomes = () => {
-    fetch(`http://localhost:3000/homes/delete/${this.props.home.id}`, {
+    fetch(`${APIURL}/delete/${this.props.home.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

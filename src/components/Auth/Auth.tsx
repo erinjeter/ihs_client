@@ -6,6 +6,7 @@ import Signup from "./Signup";
 
 type acceptedProps = {
   sessionToken: (newToken: string) => void;
+  permission: (newPermission: string) => void;
 };
 
 type valueTypes = {
@@ -32,7 +33,10 @@ class Auth extends Component<acceptedProps, valueTypes> {
     return this.state.login ? (
       <Signup sessionToken={this.props.sessionToken} />
     ) : (
-      <Login sessionToken={this.props.sessionToken} />
+      <Login
+        sessionToken={this.props.sessionToken}
+        permission={this.props.permission}
+      />
     );
   };
 

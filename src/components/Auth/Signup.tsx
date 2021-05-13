@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import APIURL from "../../helpers/environment";
 
 type acceptedProps = {
   sessionToken: any;
@@ -41,7 +42,7 @@ class Signup extends Component<acceptedProps, valueTypes> {
   handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(this.state);
-    fetch("http://localhost:3000/user/create", {
+    fetch(`${APIURL}/user/create`, {
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,

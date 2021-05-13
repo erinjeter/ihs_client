@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import APIURL from "../../helpers/environment";
 
 type acceptedProps = {
   sessionToken: any;
+  getStories: any;
 };
 
 type valueTypes = {
@@ -17,7 +19,7 @@ class AddStories extends Component<acceptedProps, valueTypes> {
   }
 
   getStories = () => {
-    fetch("http://localhost:3000/stories", {
+    fetch(`${APIURL}/stories`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +34,7 @@ class AddStories extends Component<acceptedProps, valueTypes> {
 
   addStory = (e: any) => {
     e.preventDefault();
-    fetch("http://localhost:3000/stories/create", {
+    fetch(`${APIURL}/stories/create`, {
       method: "POST",
       body: JSON.stringify({
         story: this.state.story,

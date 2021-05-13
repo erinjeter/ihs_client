@@ -3,7 +3,7 @@ import "./App.css";
 import "./components/Navbar";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import HomeIndex from "./components/Homes/HomeIndex";
 import AddHomes from "./components/Homes/AddHomes";
@@ -12,6 +12,7 @@ import StoryIndex from "./components/Stories/StoryIndex";
 
 type valueTypes = {
   sessionToken: any;
+  permission: string;
 };
 
 class App extends Component<{}, valueTypes> {
@@ -19,6 +20,7 @@ class App extends Component<{}, valueTypes> {
     super(props);
     this.state = {
       sessionToken: "",
+      permission: "",
     };
   }
 
@@ -26,12 +28,21 @@ class App extends Component<{}, valueTypes> {
     if (localStorage.getItem("sessionToken")) {
       this.setState({ sessionToken: localStorage.getItem("sessionToken") });
     }
+    if (localStorage.getItem("permission")) {
+      this.setState({ permission: localStorage.getItem("permission")! });
+    }
   }
 
   updateToken = (newToken: string) => {
     localStorage.setItem("sessionToken", newToken);
     this.setState({ sessionToken: newToken });
     console.log(this.state.sessionToken);
+  };
+
+  permissionUpdateToken = (newPermission: string) => {
+    localStorage.setItem("permission", newPermission);
+    this.setState({ permission: newPermission });
+    console.log(this.state.permission);
   };
 
   clearToken() {
@@ -42,37 +53,37 @@ class App extends Component<{}, valueTypes> {
 
   protectedViews = () => {
     return this.state.sessionToken === localStorage.getItem("sessionToken") ? (
-      <HomeIndex sessionToken={this.state.sessionToken} />
+      <Hero />
     ) : (
-      <Auth sessionToken={this.updateToken} />
+      <Auth
+        sessionToken={this.updateToken}
+        permission={this.permissionUpdateToken}
+      />
     );
   };
 
-  protectedViewsTwo = () => {
-    return this.state.sessionToken === localStorage.getItem("sessionToken") ? (
-      <StoryIndex sessionToken={this.state.sessionToken} />
-    ) : (
-      <Auth sessionToken={this.updateToken} />
-    );
-  };
+  // protectedViewsTwo = () => {
+  //   return this.state.sessionToken === localStorage.getItem("sessionToken") ? (
+  //     <Hero />
+  //   ) : (
+  //     <Auth
+  //       sessionToken={this.updateToken}
+  //       permission={this.permissionUpdateToken}
+  //     />
+  //   );
+  // };
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
+      <div className="App">
+        <BrowserRouter>
           <Navbar
             logout={this.clearToken.bind(this)}
             token={this.state.sessionToken}
+            protectedViews={this.protectedViews}
           />
-          {this.protectedViews()}
-          {this.protectedViewsTwo()}
-          <Hero />
-          <Route exact path="/homes/create">
-            <AddHomes sessionToken={this.state.sessionToken} />
-          </Route>
-          <AddStories sessionToken={this.state.sessionToken} />
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </div>
     );
   }
 }
