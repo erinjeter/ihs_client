@@ -65,7 +65,7 @@ class EditModal extends Component<acceptedProps, valueTypes> {
   };
 
   deleteHomes = () => {
-    fetch(`${APIURL}/delete/${this.props.home.id}`, {
+    fetch(`${APIURL}/homes/delete/${this.props.home.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

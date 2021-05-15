@@ -18,19 +18,19 @@ class AddStories extends Component<acceptedProps, valueTypes> {
     };
   }
 
-  getStories = () => {
-    fetch(`${APIURL}/stories`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionToken,
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-      });
-  };
+  // getStories = () => {
+  //   fetch(`${APIURL}/stories`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: this.props.sessionToken,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       console.log(json);
+  //     });
+  // };
 
   addStory = (e: any) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ class AddStories extends Component<acceptedProps, valueTypes> {
       .then((res) => res.json())
       .then((data) => {
         console.log("Story Added", data);
-        this.getStories();
+        this.props.getStories();
       });
   };
 

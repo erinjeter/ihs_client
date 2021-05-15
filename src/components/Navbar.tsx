@@ -8,6 +8,7 @@ type acceptedProps = {
   token: any;
   logout: any;
   protectedViews: any;
+  protectedViewsHomes: any;
 };
 
 class Navbar extends Component<acceptedProps, {}> {
@@ -19,7 +20,13 @@ class Navbar extends Component<acceptedProps, {}> {
     return localStorage.getItem("sessionToken") === null ? (
       ""
     ) : (
-      <button onClick={this.props.logout}>Logout</button>
+      <Link
+        onClick={this.props.logout}
+        className="p-4 text-gray-500 hover:text-gray-200"
+        to="/"
+      >
+        Logout
+      </Link>
     );
   };
 
@@ -51,16 +58,10 @@ class Navbar extends Component<acceptedProps, {}> {
               IRVINGTON STORIES
             </Link>
             <Link className="p-4 text-gray-500 hover:text-gray-200" to="/homes">
-              HISTORIC HOMES
+              VIEW HOMES
             </Link>
             {this.adminView()}
-            <Link
-              onClick={this.props.logout}
-              className="p-4 text-gray-500 hover:text-gray-200"
-              to="/"
-            >
-              Logout
-            </Link>
+            {this.logoutButton}
           </div>
         </div>
         <div>
@@ -70,6 +71,10 @@ class Navbar extends Component<acceptedProps, {}> {
             </Route>
             <Route exact path="/homes/create">
               <AddHomes sessionToken={this.props.token} />
+            </Route>
+            <Route exact path="/test">
+              {/* <HomeIndex sessionToken={this.props.token} /> */}
+              {this.props.protectedViewsHomes}
             </Route>
             <Route exact path="/">
               {this.props.protectedViews()}

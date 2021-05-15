@@ -62,16 +62,16 @@ class App extends Component<{}, valueTypes> {
     );
   };
 
-  // protectedViewsTwo = () => {
-  //   return this.state.sessionToken === localStorage.getItem("sessionToken") ? (
-  //     <Hero />
-  //   ) : (
-  //     <Auth
-  //       sessionToken={this.updateToken}
-  //       permission={this.permissionUpdateToken}
-  //     />
-  //   );
-  // };
+  protectedViewsHomes = () => {
+    return this.state.sessionToken === localStorage.getItem("sessionToken") ? (
+      <HomeIndex sessionToken={this.state.sessionToken} />
+    ) : (
+      <Auth
+        sessionToken={this.updateToken}
+        permission={this.permissionUpdateToken}
+      />
+    );
+  };
 
   render() {
     return (
@@ -81,6 +81,7 @@ class App extends Component<{}, valueTypes> {
             logout={this.clearToken.bind(this)}
             token={this.state.sessionToken}
             protectedViews={this.protectedViews}
+            protectedViewsHomes={this.protectedViewsHomes}
           />
         </BrowserRouter>
       </div>

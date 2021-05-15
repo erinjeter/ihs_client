@@ -7,7 +7,6 @@ type acceptedProps = {
 
 type valueTypes = {
   homestreet1: any;
-  // homestreet2: any;
   homecity: any;
   homestate: any;
   homezip: any;
@@ -23,7 +22,6 @@ class AddHomes extends Component<acceptedProps, valueTypes> {
     super(props);
     this.state = {
       homestreet1: "",
-      // homestreet2: "",
       homecity: "",
       homestate: "",
       homezip: "",
@@ -40,7 +38,6 @@ class AddHomes extends Component<acceptedProps, valueTypes> {
       method: "POST",
       body: JSON.stringify({
         homestreet1: this.state.homestreet1,
-        // homestreet2: this.state.homestreet2,
         homecity: this.state.homecity,
         homestate: this.state.homestate,
         homezip: this.state.homezip,
@@ -73,15 +70,7 @@ class AddHomes extends Component<acceptedProps, valueTypes> {
               value={this.state.homestreet1}
               onChange={(e) => this.setState({ homestreet1: e.target.value })}
             />
-            {/* <input
-              className="p-3 m-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
-              type="text"
-              name="street2"
-              placeholder="Street Line 2"
-              required
-              value={this.state.homestreet2}
-              onChange={(e) => this.setState({ homestreet2: e.target.value })}
-            /> */}
+
             <input
               className="p-3 m-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
               type="text"
@@ -132,8 +121,8 @@ class AddHomes extends Component<acceptedProps, valueTypes> {
               type="text"
               name="picture"
               placeholder="Image"
-              value={this.state.picture}
-              onChange={(e) => this.setState({ picture: e.target.value })}
+              value={this.state.photo}
+              onChange={(e) => this.setState({ photo: e.target.value })}
             />
             <input
               className="p-3 m-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
